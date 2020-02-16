@@ -1,5 +1,12 @@
 {%extends 'base.html'%}
-
 {% block content %}
-{{block.super}}
+<div class="content-section">
+    <div class="media">
+        <img src="{{ user.profile.prof_pic.url}}" class="img-responsive" alt="Image">
+          <div class="media-body">
+            <h5 class="account-heading">User:{{ user.username}}</h5>
+            <p class="text-secondary">{{ user.email}}</p>
+
+        </div>
+    </div>
 {% endblock %}
