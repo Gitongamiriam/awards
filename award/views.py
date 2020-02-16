@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.http import HttpResponse,Http404
 
-# Create your views here.
+# Create your views  here.
+def home(request):
+
+    return HttpResponse('welcome to moringa tribune')
+
