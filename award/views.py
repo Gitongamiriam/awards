@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404
 from .forms import *
-from .models import Profile
+from .models import Profile,Project
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -11,10 +11,6 @@ from django.contrib.auth import get_user_model
 def home(request):
 
     return render (request,'home.html')
-
-def search(request):
-
-    return render(request,'search.html')
 
 @login_required
 def profile(request):
@@ -34,6 +30,21 @@ def profile(request):
         'p_form': p_form
     }
     return render(request, 'profile.html', context)
+
+
+def search(request):
+    if 'project' in request.GET and request.GET["project"]:
+        search_term = request.GET.get("project")
+        searched_projects = Project.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request,'search.html'{"message":message, "projects":searched_projects})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request,'search.html',{"message":message})
+
+
 
 
 
