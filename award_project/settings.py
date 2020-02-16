@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'award.apps.AwardConfig',
+    'tinymce',
     'bootstrap3',
     'rest_framework',
     'crispy_forms',
