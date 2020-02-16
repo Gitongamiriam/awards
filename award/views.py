@@ -14,3 +14,7 @@ def home(request):
 def search(request):
 
     return render(request,'search.html')
+
+def profile(request):
+
+    return render(request,'profile.html')    
