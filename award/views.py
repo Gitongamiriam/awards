@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404
-from .forms import *
+from .forms import NewProjectForm
 from .models import Profile,Project
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -49,16 +49,15 @@ def search(request):
 def new_project(request):
     current_user = request.user
     if request.method == 'POST':
-        form = NewArticleForm(request.POST, request.FILES)
+        form = NewProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            article = form.save(commit=False)
-            article.editor = current_user
-            article.save()
-        return redirect('NewsToday')
+            project = form.save(commit=False)
+            project.save()
+        return redirect('new_project')
 
     else:
-        form = NewArticleForm()
-    return render(request, 'new_article.html', {"form": form})        
+        form = NewProjectForm()
+    return render(request, 'new_project.html', {"form": form})        
 
 
 
