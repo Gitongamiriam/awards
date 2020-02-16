@@ -45,6 +45,22 @@ def search(request):
         return render(request,'search.html',{"message":message})
 
 
+@login_required(login_url='/accounts/login/')
+def new_project(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewArticleForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.save(commit=False)
+            article.editor = current_user
+            article.save()
+        return redirect('NewsToday')
+
+    else:
+        form = NewArticleForm()
+    return render(request, 'new_article.html', {"form": form})        
+
+
 
 
 
