@@ -47,11 +47,9 @@ def search(request):
 
 @login_required(login_url='/accounts/login/')
 def new_project(request):
-    current_user = request.user
     if request.method == 'POST':
         form = NewProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            project = form.save(commit=False)
             project.save()
         return redirect('new_project')
 

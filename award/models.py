@@ -29,9 +29,13 @@ class Project(models.Model):
     description = HTMLField()
     project_pic = models.ImageField(null=True,upload_to="project/")
     pub_date = models.DateTimeField(auto_now_add=True)
-    live_site =models.URLField(max_length=300,blank=True)
+    live_site =models.URLField(max_length=300)
     objects = models.Manager()
 
+    def save_project(self):
+        self.save()
+
+                                            
     @classmethod
     def search_by_title(cls,search_term):
         project = cls.objects.filter(title_icontains=search_term)
