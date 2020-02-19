@@ -32,12 +32,19 @@ class Project(models.Model):
     live_site =models.URLField(max_length=300)
     objects = models.Manager()
 
-    def save_project(self):
-        self.save()
+    def __str__(self):
+        return self.title
 
-                                            
+    class Meta:
+        ordering = ['pub_date']
+
+    @classmethod
+    def show_projects(cls):
+        projects= cls.objects.order_by('pub_date')
+        return projects
+
     @classmethod
     def search_by_title(cls,search_term):
-        project = cls.objects.filter(title_icontains=search_term)
+        project = cls.objects.filter(title__icontains=search_term)
         return project
 

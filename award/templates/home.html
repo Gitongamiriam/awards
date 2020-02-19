@@ -1,3 +1,29 @@
 {%extends 'base.html'%}
 {% block content %}
+{{block.super}}
+{% for project in projects %}
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img  src="{{project.project_pic.url}}" class="img-responsive" alt="Image">
+            <div class="card-body">
+                <h4 class="card-title">{{project.title}}</h4>
+                <p class="card-text">
+                    {% autoescape on %}
+                    {{project.description| safe}}
+                    ` {% endautoescape %}<br>
+                    {{project.pub_date}}<br>
+                </p>
+                <a href="{{project.live_site}}" class="btn btn-primary">visit link</a>
+            </div>
+        </div>
+    </div><br>
+</div><br>
+{% endfor %}
+
+
+
+
 {% endblock %}
