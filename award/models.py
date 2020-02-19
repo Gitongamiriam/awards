@@ -7,7 +7,8 @@ from tinymce.models import HTMLField
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     prof_pic = models.ImageField(upload_to='images/')
-    bio = models.TextField(blank=True)
+    bio = models.TextField()
+    contact = HTMLField()
     objects = models.Manager()
 
     class Meta:
@@ -47,4 +48,15 @@ class Project(models.Model):
     def search_by_title(cls,search_term):
         project = cls.objects.filter(title__icontains=search_term)
         return project
+
+
+
+class ProfileMerch(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    prof_pic = models.ImageField(upload_to='images/')
+    bio =models.TextField()
+    contact = HTMLField
+
+
+        
 
