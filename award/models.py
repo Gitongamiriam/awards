@@ -51,11 +51,6 @@ class Project(models.Model):
 
 
 
-class ProfileMerch(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
-    prof_pic = models.ImageField(upload_to='images/')
-    bio =models.TextField()
-    contact = HTMLField
 
 
         

@@ -5,6 +5,9 @@ from .models import Profile,Project
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer,ProjectSerializer
 
 # Create your views  here.
 @login_required(login_url='/accounts/login/')
@@ -45,6 +48,12 @@ def search(request):
         return render(request,'search.html',{"message":message})
 
 @login_required(login_url='/accounts/login/')
+def project(request):
+    projects =Project.show_projects()
+   
+    return render(request,"project.html", {"project":project})        
+
+@login_required(login_url='/accounts/login/')
 def new_project(request):
     current_user = request.user
     if request.method == 'POST':
@@ -58,6 +67,19 @@ def new_project(request):
         form = NewProjectForm()
     return render(request, 'new_project.html', {"form": form})
 
+
+
+class ProfileList(APIView):
+    def get(self,request,format=None):
+        all_profile = Profile.objects.all()
+        serializers = ProfileSerializer(all_profile,many = True)
+        return Response(serializers.data)
+
+class ProjectList(APIView):
+    def get(self,request,format=None):
+        all_project = Project.objects.all()
+        serializers = ProjectSerializer(all_project,many = True)
+        return Response(serializers.data)       
 
 
 
