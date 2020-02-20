@@ -51,7 +51,11 @@ def search(request):
 def project(request):
     projects =Project.show_projects()
    
-    return render(request,"project.html", {"project":project})        
+    return render(request,"project.html", {"project":project})      
+# 
+# 
+#
+
 
 @login_required(login_url='/accounts/login/')
 def new_project(request):
