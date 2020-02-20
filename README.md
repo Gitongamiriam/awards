@@ -79,8 +79,8 @@ python3.6 manage.py runserver
 ```
 localhost:8000/admin
 ```
-## BUgs
--
+##  Known Bugs
+-  This are the future implementation  
 ## Project live-link
 
 
