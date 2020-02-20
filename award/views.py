@@ -48,13 +48,12 @@ def search(request):
         return render(request,'search.html',{"message":message})
 
 @login_required(login_url='/accounts/login/')
-def project(request):
-    projects =Project.show_projects()
-   
-    return render(request,"project.html", {"project":project})      
-# 
-# 
-#
+def project(request,project_id):
+    try:
+        project = Projects.objects.get(id = project_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"project.html", {"project":project})
 
 
 @login_required(login_url='/accounts/login/')
